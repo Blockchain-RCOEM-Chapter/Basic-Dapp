@@ -12,14 +12,17 @@
       box-sizing: border-box;
     }
 
-    body {
+    #body {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: "IBM Plex Mono", monospace;
-      background-color: black;
       color: white;
+      margin-inline: 25%;
+      margin-top: 5%;
+      /* backdrop-filter: blur(10px); */
+      backdrop-filter: invert(80%);
     }
 
     #inputHolder {
@@ -28,7 +31,7 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
-      margin: 50px;
+      margin: 30px;
     }
 
     input {
@@ -65,12 +68,15 @@
     type="application/javascript"
   ></script>
 
-  <body>
-    <img src="logo.png" alt="BRC Logo" />
-    <h1>The Mood Dapp</h1>
-    <p>made by BRC team</p>
-    <div id="inputHolder">
-      <label for="mood">Enter your mood</label>
+  <body style="background-image: url(https://source.unsplash.com/collection/894/1920x1080); ">
+   <p style="justify-content: center; display: flex; color: white; font-size: 40px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">MY FIRST DAAP</p>
+    <div id="body">
+
+      <img src="logo.png" alt="BRC Logo" />
+      <h1>The Mood Dapp</h1>
+      <p>made by {Your Name}</p>
+      <div id="inputHolder">
+        <label for="mood">Enter your mood</label>
       <input type="text" id="mood" />
     </div>
     <div>
@@ -128,6 +134,7 @@
       async function getMood() {
         try {
           const mood = await moodContract.getMood();
+          alert(mood)
           console.log(mood);
           document.getElementById(
             "showMood"
@@ -147,5 +154,6 @@
         }
       }
     </script>
+</div>
   </body>
 </html>
