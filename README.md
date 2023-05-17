@@ -163,7 +163,7 @@ Now it's time to create a Solidity smart contract.
     }
    ```
 
-   - And that's it! Your code should look like [this](https://github.com/Blockchain-RCOEM-Chapter/COHORT4-Resources/blob/main/Contract/mood.sol)
+   - And that's it! Your code should look like [this](https://github.com/Blockchain-RCOEM-Chapter/COHORT4-Resources/blob/main/daap/Contract/mood.sol)
 
 6. Deploy the contract on the Ropsten Testnet.
    - Make sure your Metamask is connected to the Ropsten Testnet.
