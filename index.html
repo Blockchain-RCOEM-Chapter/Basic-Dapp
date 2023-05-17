@@ -60,6 +60,10 @@
       font-family: "IBM Plex Mono", monospace;
     }
   </style>
+  <script
+    src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+    type="application/javascript"
+  ></script>
 
   <body>
     <img src="logo.png" alt="BRC Logo" />
@@ -74,76 +78,74 @@
       <button onclick="setMood()">Set Mood</button>
     </div>
     <p id="showMood"></p>
-  </body>
-  <script
-    src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
-    type="application/javascript"
-  ></script>
-  <script>
-    const moodContractAddress = "0x9031ff6fdba456bA87bAb2197CBD6101fbE7dd46";
-    let moodContract;
-    let signer;
-    const contractABI = [
-      {
-        inputs: [],
-        name: "getMood",
-        outputs: [
-          {
-            internalType: "string",
-            name: "",
-            type: "string",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "string",
-            name: "_mood",
-            type: "string",
-          },
-        ],
-        name: "setMood",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-    ];
-    const provider = new ethers.providers.Web3Provider(window.ethereum,"any")
-    provider.send("eth_requestAccounts", []).then(() => {
-      provider.listAccounts().then((accounts) => {
-        signer = provider.getSigner(accounts[0]);
-        moodContract = new ethers.Contract(
-          moodContractAddress,
-          contractABI,
-          signer
-        );
+    <script>
+      const moodContractAddress = "0x9031ff6fdba456bA87bAb2197CBD6101fbE7dd46";
+      let moodContract;
+      let signer;
+      const contractABI = [
+        {
+          inputs: [],
+          name: "getMood",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "_mood",
+              type: "string",
+            },
+          ],
+          name: "setMood",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ];
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum,
+        "any"
+      );
+      provider.send("eth_requestAccounts", []).then(() => {
+        provider.listAccounts().then((accounts) => {
+          signer = provider.getSigner(accounts[0]);
+          moodContract = new ethers.Contract(
+            moodContractAddress,
+            contractABI,
+            signer
+          );
+        });
       });
-    });
 
-    async function getMood() {
-      try {
-        const mood = await moodContract.getMood();
-        console.log(mood);
-        document.getElementById(
-          "showMood"
-        ).innerText = `Your mood is set to ${mood}`;
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    async function setMood() {
-        const mood = document.getElementById("mood").value;
-        try{
-            const setMoodResponse = moodContract.setMood(mood);
-            await setMoodResponse.wait();
-        }catch(err){
-            console.log(err);
+      async function getMood() {
+        try {
+          const mood = await moodContract.getMood();
+          console.log(mood);
+          document.getElementById(
+            "showMood"
+          ).innerText = `Your mood is set to ${mood}`;
+        } catch (err) {
+          console.error(err);
         }
-    }
+      }
 
-  </script>
+      async function setMood() {
+        const mood = document.getElementById("mood").value;
+        try {
+          const setMoodResponse = await moodContract.setMood(mood);
+          await setMoodResponse.wait();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    </script>
+  </body>
 </html>
