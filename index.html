@@ -60,90 +60,16 @@
       font-family: "IBM Plex Mono", monospace;
     }
   </style>
-
-  <body>
-    <img src="logo.png" alt="BRC Logo" />
-    <h1>The Mood Dapp</h1>
-    <p>made by BRC team</p>
-    <div id="inputHolder">
-      <label for="mood">Enter your mood</label>
-      <input type="text" id="mood" />
-    </div>
-    <div>
-      <button onclick="getMood()">Get Mood</button>
-      <button onclick="setMood()">Set Mood</button>
-    </div>
-    <p id="showMood"></p>
-  </body>
   <script
     src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
     type="application/javascript"
   ></script>
-  <script>
-    const moodContractAddress = "0x9031ff6fdba456bA87bAb2197CBD6101fbE7dd46";
-    let moodContract;
-    let signer;
-    const contractABI = [
-      {
-        inputs: [],
-        name: "getMood",
-        outputs: [
-          {
-            internalType: "string",
-            name: "",
-            type: "string",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "string",
-            name: "_mood",
-            type: "string",
-          },
-        ],
-        name: "setMood",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-    ];
-    const provider = new ethers.providers.Web3Provider(window.ethereum,"any")
-    provider.send("eth_requestAccounts", []).then(() => {
-      provider.listAccounts().then((accounts) => {
-        signer = provider.getSigner(accounts[0]);
-        moodContract = new ethers.Contract(
-          moodContractAddress,
-          contractABI,
-          signer
-        );
-      });
-    });
+  <body>
+    <img src="logo.png" alt="BRC Logo" />
 
-    async function getMood() {
-      try {
-        const mood = await moodContract.getMood();
-        console.log(mood);
-        document.getElementById(
-          "showMood"
-        ).innerText = `Your mood is set to ${mood}`;
-      } catch (err) {
-        console.error(err);
-      }
-    }
+    
+    <script>
 
-    async function setMood() {
-        const mood = document.getElementById("mood").value;
-        try{
-            const setMoodResponse = moodContract.setMood(mood);
-            await setMoodResponse.wait();
-        }catch(err){
-            console.log(err);
-        }
-    }
-
-  </script>
+    </script>
+  </body>
 </html>
