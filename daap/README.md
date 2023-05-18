@@ -21,19 +21,8 @@ By the end of this tutorial you will be able to create a simple HTML front end w
 
    - Click Ethereum Mainnet in the top. Change to the Ropsten Tesnet and get a copy of the account's public address on your Metamask Wallet.
 
-2. **Request some Ropsten Tesnet Ether from a faucet loaded into your Metamask Wallet.**
+2. **Request some Testnet ETH.**
 
-   - [Faucet link to request funds](https://faucet.egorfine.com/)
-   - [Blog explaining a faucet and how to use one](https://blog.b9lab.com/when-we-first-built-our-faucet-we-deployed-it-on-the-morden-testnet-70bfbf4e317e)
-
-3. **Install a http server. Use any you like, but we recommend `lite-server` for beginners:**
-
-   - Install Node.js ([Download and Instructions](https://nodejs.org/en/download/))
-   - Install lite-server (with NPM in a terminal/command prompt):
-
-   ```bash
-   npm install -g lite-server #install lite-server globally
-   ```
 
 ---
 
@@ -80,38 +69,11 @@ We will create an app that simply reads and writes a value to the blockchain. We
 ```html
 <button onclick="getMood()">Get Mood</button>
 <button onclick="setMood()">Set Mood</button>
-```
 
-OPTIONAL: Inside the `<head>` tag, add some styles to make it look nicer
 
-```html
-<style>
-  body {
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  div {
-    width: 20%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-  }
-
-  button {
-    width: 100%;
-    margin: 10px 0px 5px 0px;
-  }
-</style>
-```
-
-8.  Serve the webpage via terminal/command prompt from the directory that has `index.html` in it and run:
-
-    ```bash
-    lite-server
-    ```
-
-9.  Go to [http://127.0.0.1:3000/](http://127.0.0.1:3000/) in your browser to see your page!
+8.  Install a browser extension **live server** from VS Code Extenstions:
+ 
+9.  Click on Go Live!
 
 10. Your front end is now complete!
 
@@ -274,7 +236,7 @@ const MoodContractABI = [
 3. Next, Define an ethers provider. In our case it is Ropsten:
 
 ```javascript
-const provider = new ethers.providers.Web3Provider(window.ethereum, "ropsten");
+const provider = new ethers.providers.Web3Provider(window.ethereum);
 ```
 
 4. Request access to the user's wallet and connect the signer to your metamask account (we use `[0]` as the default), and define the contract object using your contract address, ABI, and signer
@@ -327,25 +289,3 @@ async function setMood() {
 ---
 
 ### DONE!
-
-Celebrate! You just made a webpage that interacted with _a real live Ethereum testnet on the internet_! That is not something many folks can say they have done!
-
----
-
-### If you had trouble with the tutorial, you can try out the example app provided.
-
-```bash
-git clone https://github.com/Blockchain-RCOEM-Chapter/COHORT4-Resources
-cd BasicFrontEndTutorial
-lite-server
-```
-
-#### Try and use the following information to interact with an existing contract we published on the Roptsen testnet:
-
-- We have a `MoodDiary` contract instance created [at this transaction](https://ropsten.etherscan.io/tx/0x8da093fdc4ae3e1b469dfff97b414a9800c9fdd8c1c897b6b746faf43aa3b7f8)
-
-- Here is the contract ([on etherscan](https://ropsten.etherscan.io/address/0xc5afd2d92750612a9619db2282d9037c58fc22cb))
-
-  - We also verified our source code to [ropsten.etherscan.io](https://ropsten.etherscan.io/address/0xc5afd2d92750612a9619db2282d9037c58fc22cb#code) as an added measure for you to verify what the contract is exactly, and also the ABI is available to _the world_!
-
-#### This illustrates an important point: you can also build a dApp _without needing to write the Ethereum contract yourself_! If you want to use an existing contract written and already on Ethereum, you can!
