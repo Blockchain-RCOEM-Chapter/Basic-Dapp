@@ -85,37 +85,37 @@
     </div>
     <p id="showMood"></p>
     <script>
-      const moodContractAddress = "0x9031ff6fdba456bA87bAb2197CBD6101fbE7dd46";
+      const moodContractAddress = "0x4Dce9c4505b3aC986bbEaEC3d00fd68EEc79E8c2";
       let moodContract;
       let signer;
-      const contractABI = [
-        {
-          inputs: [],
-          name: "getMood",
-          outputs: [
-            {
-              internalType: "string",
-              name: "",
-              type: "string",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "string",
-              name: "_mood",
-              type: "string",
-            },
-          ],
-          name: "setMood",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-      ];
+      const contractABI =[
+	{
+		"inputs": [],
+		"name": "getMood",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_mood",
+				"type": "string"
+			}
+		],
+		"name": "setMood",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
       const provider = new ethers.providers.Web3Provider(
         window.ethereum,
         "any"
